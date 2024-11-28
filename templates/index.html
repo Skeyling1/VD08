@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Погода</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Сайт с прогнозом погоды в любой точке мира</h1>
+
+        <form method="post" class="mt-4">
+            <div class="input-group mb-3">
+                <input type="text" name="city" class="form-control" placeholder="Введите город:" required>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Узнать погоду</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="result mt-4">
+            {% if weather %}
+                <div class="alert alert-info">
+                    <h3>Погода в {{ weather['name'] }}</h3>
+                    <p>Температура: {{ weather['main']['temp'] }} °C</p>
+                    <p>Погода: {{ weather['weather'][0]['main'] }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Подключение jQuery и Bootstrap JS (необязательно для данной страницы, но может понадобиться для интерактивности) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
