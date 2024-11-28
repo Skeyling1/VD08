@@ -6,12 +6,22 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     weather = None
-    news = None
+    fact = None
+    news = get_news()
     if request.method == 'POST':
-        city = request.form['city']
-        weather = get_weather(city)
-        news = get_news()
-    return render_template("index.html", weather=weather, news=news)
+        try:
+            city = request.form['city']
+            weather = get_weather(city)
+        except:
+            city = None
+
+        try:
+            number = request.form['number']
+            fact = get_fact(number)
+        except:
+            fact = None
+
+    return render_template("index.html", weather=weather, news=news, fact=fact)
 
 
 def get_weather(city):
@@ -25,6 +35,12 @@ def get_news():
     url = f"https://newsapi.org/v2/top-headlines?country=us&apiKey={api_key}"
     response = requests.get(url)
     return response.json().get('articles', [])
+
+def get_fact(number):
+    url = f"http://numbersapi.com/{number}"
+    response = requests.get(url)
+    return response.text
+
 
 if __name__ == '__main__':
     app.run(debug=True)
