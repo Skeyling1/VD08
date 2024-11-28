@@ -25,13 +25,13 @@ def index():
 
 
 def get_weather(city):
-    api_key = "ваш API"
+    api_key = "ваш токен"
     url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&APPID={api_key}&units=metric"
     response = requests.get(url)
     return response.json()
 
 def get_news():
-    api_key = "ваш API"
+    api_key = "ваш токен"
     url = f"https://newsapi.org/v2/top-headlines?country=us&apiKey={api_key}"
     response = requests.get(url)
     return response.json().get('articles', [])
