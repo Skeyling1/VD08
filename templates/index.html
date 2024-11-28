@@ -28,6 +28,20 @@
                     <p>Погода: {{ weather['weather'][0]['main'] }}</p>
                 </div>
             {% endif %}
+        <div>
+
+        <div class="result mt-4">
+            {% if news %}
+                <h2>Новости:</h2>
+                <ul>
+                    {% for article in news%}
+                    <li>
+                        <a href="{{ article['url'] }}"> {{article['title']}} </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
         </div>
     </div>
 
